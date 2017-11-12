@@ -1,22 +1,94 @@
-<p>Click the button to get your coordinates.</p>
+<% if @status %>
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBaV_RM1ZpLyJr1iTIU6-eoLyYKsPt9JzQ"></script>
+<p id="demo">Click the button to get your position.</p>
 
-<button onclick="getLocation()">Try It</button>
+<div id="map" style="width: 500px; height: 400px;"></div>
+<!-- <% @alternative_drugs.each do |alternative_drug| %> -->
+  <!-- <%= alternative_drug %> -->
+<!-- <% end %> -->
 
-<p id="demo"></p>
+<script>
+var locations = <%= @locations %>;
+
+var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 10,
+  center: new google.maps.LatLng(51.530616, -0.123125),
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
+var latlon = new google.maps.LatLng("<%=@latitude%>","<%=@longitude%>");
+var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+var marker=new google.maps.Marker({
+  position:latlon,
+  map:map,
+  title:"You are here!",
+  icon: iconBase + 'library_maps.png'
+});
+
+var infowindow = new google.maps.InfoWindow();
+
+var marker, i;
+var markers = new Array();
+
+for (i = 0; i < locations.length; i++) {
+  marker = new google.maps.Marker({
+    position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+    map: map
+  });
+
+  markers.push(marker);
+
+  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    return function() {
+      infowindow.setContent("Shop");
+      infowindow.open(map, marker);
+    }
+  })(marker, i));
+}
+
+function AutoCenter() {
+  //  Create a new viewpoint bound
+  var bounds = new google.maps.LatLngBounds();
+  //  Go through each...
+  $.each(markers, function (index, marker) {
+  bounds.extend(marker.position);
+  });
+  //  Fit these bounds to the map
+  map.fitBounds(bounds);
+}
+AutoCenter();
+</script>
+
+<% else %>
+  <p>Find your Medicine</p>
+  <form action="/home/index" method="get" id="main_form">
+    <!-- <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden"> -->
+    Name of Medicine: <input name="drug" type="text" id="drug"/><br/>
+    <input type="text" name="latitude" id="latitude" hidden="true">
+    <input type="text" name="longitude" id="longitude" hidden="true">
+    <!-- <button>Submit</button> -->
+
+</form>
+<button onclick="getLocation()">Search</button>
+  <p id="demo"></p>
 
 <script>
 var x = document.getElementById("demo");
+var lat = document.getElementById("latitude");
+var long = document.getElementById("longitude");
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(setPosition);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
+function setPosition(position) {
+    lat.value = position.coords.latitude;
+    long.value = position.coords.longitude;
+    document.getElementById("main_form").submit();
 }
 </script>
+<% end %>
