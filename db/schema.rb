@@ -10,15 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112044515) do
+ActiveRecord::Schema.define(version: 20171112160447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "medicine_counts", force: :cascade do |t|
-    t.integer  "count",      default: 0, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "count",       default: 0, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "shop_id"
+    t.integer  "medicine_id"
+    t.index ["medicine_id"], name: "index_medicine_counts_on_medicine_id", using: :btree
+    t.index ["shop_id"], name: "index_medicine_counts_on_shop_id", using: :btree
   end
 
   create_table "medicines", force: :cascade do |t|
@@ -34,6 +38,7 @@ ActiveRecord::Schema.define(version: 20171112044515) do
     t.float    "longitude"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "address"
   end
 
   create_table "users", force: :cascade do |t|
