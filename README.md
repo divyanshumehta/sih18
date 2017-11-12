@@ -1,24 +1,18 @@
-# README
+# Problem Statement
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Develop an application where the prescription from a doctor/hospital is digitalized and directly transferred to patient or caretaker. The application will also handle the database for the availability of the drug or the substitute of that drug in the vicinity/city.
 
-Things you may want to cover:
+# Technology Stack
 
-* Ruby version
+1. Ruby On Rails
+2. PostgreSQL
+3. Google Map Javascript API
 
-* System dependencies
+# Members Details
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Divyanshu Mehta [divyanshumehta](https://github.com/divyanshumehta)
+2. Arnav [arnav-amb](https://github.com/arnav-amb)
+3. MD Danish Anwar [danishanwar](https://github.com/danishanwar)
+4. Sudip Saha [sudip39](https://github.com/sudip39)
+5. Abhishek Karn [blaze-nitd](https://github.com/blaze-nitd)
+6. Ashutosh Kumar Ray [ashuray](https://github.com/ashuray)
