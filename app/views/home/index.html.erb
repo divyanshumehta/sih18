@@ -5,19 +5,27 @@
 </style>
 <% if @status=="Hola its working" %>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBaV_RM1ZpLyJr1iTIU6-eoLyYKsPt9JzQ"></script>
-<p id="demo" style="text-align: center;">Stores where <strong><%= params[:drug]%></strong>   is available in your location.</p>
+<p id="demo" style="text-align: center;">Stores where <strong><%= params[:drug]%></strong> is available in your location.</p>
 
 <div id="map" style="padding-left: 5em;padding-right: 5em;height: 400px; color:#AAA;"></div>
-<p class="calibri-text" style="font-size: 200%;" align="center"">Alternatives for <%= params[:drug]%></p>
-<ul>
-  <% @alternative_drugs.each do |alternative_drug| %>
-    <li>
-      <%= alternative_drug %>
-    </li>
-  <% end %>
-</ul>
-
-
+<% if @alternative_drugs.length == 0 %>
+    <p class="calibri-text" style="font-size: 200%;" align="center"">No Alternatives Available</p>
+<% else %>
+    <p class="calibri-text" style="font-size: 200%;" align="center"">Alternatives for <%= params[:drug]%></p>
+    <ul>
+        <% @alternative_drugs.each do |alternative_drug| %>
+          <div align="center">
+            <li>
+              <a style="font-size: 200%" href="/home/index?drug=<%= alternative_drug %>&latitude=<%=@latitude%>&longitude=<%=@longitude%>">
+              <%= alternative_drug %></a>
+            </li>
+          </div>
+        <% end %>
+    </ul>
+<% end %>
+<div align="center">
+  <a href="/home/index" class="waves-effect waves-light btn">Search Another</a>
+</div>
 <script>
 var locations = <%= @locations %>;
 var shop_details= <%=  raw @shop_details.to_json %>
@@ -97,4 +105,7 @@ function setPosition(position) {
 </script>
 <% else %>
 <p class="calibri-text" style="font-size: 200%;" align="center">Sorry no Medicine found in database</p>
+<div align="center">
+  <a href="/home/index" class="waves-effect waves-light btn">Search Another</a>
+</div>
 <% end %>
