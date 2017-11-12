@@ -14,7 +14,9 @@
 
 
 <script>
+
 var locations = <%= @locations %>;
+var shop_details= <%=  raw @shop_details.to_json %>
 
 var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 10,
@@ -46,7 +48,7 @@ for (i = 0; i < locations.length; i++) {
 
   google.maps.event.addListener(marker, 'click', (function(marker, i) {
     return function() {
-      infowindow.setContent("Shop");
+      infowindow.setContent("<b>"+shop_details[i][0]+"</b><br/>"+shop_details[i][1]+"<br>Quantity Available:"+locations[i][2]);
       infowindow.open(map, marker);
     }
   })(marker, i));

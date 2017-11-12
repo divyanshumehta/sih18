@@ -6,11 +6,12 @@ class HomeController < ApplicationController
       shops = Shop.all
       total_count = 0
       @locations = []
+      @shop_details = []
       shops.each do |shop|
         med_count = MedicineCount.find_by(shop_id:shop.id, medicine_id:drug.id)
         if med_count
           temp = [shop.latitude,shop.longitude,med_count.count]
-          
+          @shop_details.push [shop.name,shop.address]
           @locations.push temp
         end
       end
