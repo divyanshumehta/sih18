@@ -3,14 +3,28 @@
   <head>
     <title>Sih18</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="background-color: #E0E0E0;">
+    <nav>
+      <div class="nav-wrapper" style="background-color: #B71C1C">
+        <a href="/home/index" style="padding-left: 1em;" class="brand-logo center">Med Find</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        </ul>
+      </div>
+    </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    
+    <div style="padding-left: 20em;padding-top: 5em;padding-right: 20em">
+      <div class="card" style="background-color: #ffffff">
+        <div style="padding-left: 5em;padding-right: 5em;padding-bottom: 5em;padding-top: 2em;">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  
   </body>
 </html>
