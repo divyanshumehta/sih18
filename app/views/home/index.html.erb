@@ -1,4 +1,4 @@
-<% if @status %>
+<% if @status=="Hola its working" %>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBaV_RM1ZpLyJr1iTIU6-eoLyYKsPt9JzQ"></script>
 <p id="demo" style="text-align: center;">Stores where <strong><%= params[:drug]%></strong>   is available in your location.</p>
 
@@ -67,7 +67,7 @@ function AutoCenter() {
 AutoCenter();
 </script>
 
-<% else %>
+<% elsif @status=="search" %>
   <p>Find your Medicine</p>
   <form action="/home/index" method="get" id="main_form">
     <!-- <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden"> -->
@@ -99,4 +99,6 @@ function setPosition(position) {
     document.getElementById("main_form").submit();
 }
 </script>
+<% else %>
+<h1>Sorry no Medicine found in database</h1>
 <% end %>
