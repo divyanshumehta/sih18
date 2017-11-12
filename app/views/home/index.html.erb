@@ -1,12 +1,17 @@
 <% if @status %>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBaV_RM1ZpLyJr1iTIU6-eoLyYKsPt9JzQ"></script>
-<p id="demo">Stores where <%= params[:drug]%> is available in your location.</p>
+<p id="demo" style="text-align: center;">Stores where <strong><%= params[:drug]%></strong>   is available in your location.</p>
 
-<div id="map" style="width: 500px; height: 400px;"></div>
-<h3>Alternatives for <%= params[:drug]%></h3>
-<% @alternative_drugs.each do |alternative_drug| %>
-  <%= alternative_drug %>
-<% end %>
+<div id="map" style="width: 1350px; height: 400px; color:#AAA"></div>
+<h3 style="text-align: center;">Alternatives for <%= params[:drug]%></h3>
+<ul>
+  <li>
+    <% @alternative_drugs.each do |alternative_drug| %>
+    <%= alternative_drug %>
+    <% end %>
+  </li>
+</ul>
+
 
 <script>
 var locations = <%= @locations %>;
@@ -28,7 +33,7 @@ var marker=new google.maps.Marker({
 
 var infowindow = new google.maps.InfoWindow();
 
-var marker, i;
+var markers, i;
 var markers = new Array();
 
 for (i = 0; i < locations.length; i++) {

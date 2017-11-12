@@ -10,6 +10,7 @@ class HomeController < ApplicationController
         med_count = MedicineCount.find_by(shop_id:shop.id, medicine_id:drug.id)
         if med_count
           temp = [shop.latitude,shop.longitude,med_count.count]
+          
           @locations.push temp
         end
       end
