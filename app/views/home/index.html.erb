@@ -1,11 +1,12 @@
 <% if @status %>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBaV_RM1ZpLyJr1iTIU6-eoLyYKsPt9JzQ"></script>
-<p id="demo">Click the button to get your position.</p>
+<p id="demo">Stores where <%= params[:drug]%> is available in your location.</p>
 
 <div id="map" style="width: 500px; height: 400px;"></div>
-<!-- <% @alternative_drugs.each do |alternative_drug| %> -->
-  <!-- <%= alternative_drug %> -->
-<!-- <% end %> -->
+<h3>Alternatives for <%= params[:drug]%></h3>
+<% @alternative_drugs.each do |alternative_drug| %>
+  <%= alternative_drug %>
+<% end %>
 
 <script>
 var locations = <%= @locations %>;
